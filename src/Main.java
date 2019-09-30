@@ -1,3 +1,6 @@
+import org.w3c.dom.ls.LSOutput;
+
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
@@ -8,11 +11,13 @@ public class Main {
         // Her starter spillet
         StenSaksPapir runde1 = new StenSaksPapir();
         int count = 0;
+        int spillerVinder = 0;
+        int computerVinder = 0;
+        int uafgjort = 0;
+        int fejl = 0;
 
         while (count < 10) {
-            int spillerVinder = 0;
-            int computerVinder = 0;
-            int uafgjort = 0;
+
             // indlæse spillerens hånd
             Scanner input = new Scanner(System.in);
             Haand spillerensHaand = null;
@@ -42,20 +47,28 @@ public class Main {
             int resulat = runde1.slaa(spillerensHaand, computersHaand);
             if (resulat == 1) {
                 System.out.println("Spilleren vinder");
+                spillerVinder++;
             }
             if (resulat == 2) {
                 System.out.println("Computeren vinder");
+                computerVinder++;
             }
             if (resulat == 0) {
                 System.out.println("Udfaldet er ens");
+                uafgjort++;
             }
             if (resulat == -1) {
                 System.out.println("FEJL!!!!");
+                fejl++;
             }
-
+            count++;
 
         }
-        count++;
+
+        System.out.println("Spilleren har vundet " + spillerVinder + " ud af 10 gange");
+        System.out.println("Computeren har vundet " + computerVinder + " ud af 10 gange");
+        System.out.println("spillet blev uafgjort " + uafgjort + " ud af 10 gange");
+        System.out.println("der var fejl " + fejl + " ud af 10 gange");
     }
 
 }
